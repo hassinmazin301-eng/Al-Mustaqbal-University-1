@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
   <head>
@@ -34,7 +33,7 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
+    
     <style>
       body {
         font-family: 'Cairo', sans-serif;
@@ -47,7 +46,8 @@
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
   }
 }
 </script>
@@ -58,7 +58,7 @@
     <script type="text/babel">
       const { useState, useEffect } = React;
 
-      // --- ICONS (Inline SVGs to avoid dependency issues) ---
+      // --- ICONS (Inline SVGs) ---
       const IconCheck = ({ className }) => (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
       );
@@ -74,19 +74,18 @@
       const IconArrow = ({ className }) => (
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
       );
+      const IconInstagram = ({ className }) => (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+      );
+      const IconActivity = ({ className }) => (
+         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      );
 
       // --- COMPONENTS ---
 
       const Header = () => {
-        // --- CONFIGURATION ---
-        
-        // 1. RIGHT LOGO: University Logo
-        // Replace the link inside the quotes with the University Logo URL
-        const UNIVERSITY_LOGO_URL = "components/mus.png";
-        
-        // 2. LEFT LOGO: College Logo
-        // Replace the link inside the quotes with the College of Engineering Techniques Logo URL
-        const COLLEGE_LOGO_URL = "components/eng.png";
+        const UNIVERSITY_LOGO_URL = "https://upload.wikimedia.org/wikipedia/commons/e/e6/Al-Mustaqbal_University_College_logo.png";
+        const COLLEGE_LOGO_URL = "https://upload.wikimedia.org/wikipedia/commons/e/e6/Al-Mustaqbal_University_College_logo.png";
 
         return (
           <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-lg transition-all duration-300">
@@ -95,7 +94,6 @@
                 
                 {/* Right Logo (University) */}
                 <div className="flex-shrink-0 w-20 md:w-32 flex justify-start">
-                   {/* NO FILTERS applied here - Original Colors */}
                    <img 
                      src={UNIVERSITY_LOGO_URL} 
                      alt="شعار جامعة المستقبل" 
@@ -118,7 +116,6 @@
 
                 {/* Left Logo (College) */}
                 <div className="flex-shrink-0 w-20 md:w-32 flex justify-end">
-                   {/* NO FILTERS applied here - Original Colors */}
                    <img 
                      src={COLLEGE_LOGO_URL}
                      alt="شعار كلية التقنيات الهندسية" 
@@ -135,7 +132,7 @@
 
       const DepartmentBanner = () => {
         return (
-          <div className="relative w-full max-w-4xl mx-auto my-8 px-4 group">
+          <div className="relative w-full max-w-4xl mx-auto my-6 px-4 group">
             <a 
               href="https://test.uomus.edu.iq/Department/Index/39"
               target="_blank"
@@ -166,7 +163,7 @@
 
       const MotivationalText = () => {
         return (
-          <div className="w-full max-w-4xl mx-auto px-4 mb-8">
+          <div className="w-full max-w-4xl mx-auto px-4 mb-2">
             <div className="bg-gradient-to-bl from-slate-800 to-slate-900 rounded-3xl p-8 md:p-10 text-white shadow-2xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-uomus-teal opacity-10 rounded-full blur-3xl -mr-16 -mt-16"></div>
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500 opacity-10 rounded-full blur-3xl -ml-16 -mb-16"></div>
@@ -193,9 +190,99 @@
         );
       };
 
+      const ImportanceSection = () => {
+        return (
+          <div className="w-full max-w-6xl mx-auto px-4 mb-10">
+            <div className="bg-slate-800 rounded-[2.5rem] p-8 md:p-12 text-white relative overflow-hidden shadow-2xl">
+              
+              <div className="absolute top-0 left-0 w-full h-full bg-slate-900 opacity-50"></div>
+              <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-cyan-500 blur-[100px] opacity-20 rounded-full"></div>
+              
+              <div className="relative z-10 flex flex-col lg:flex-row gap-10 items-center">
+                
+                <div className="lg:w-1/3 flex flex-col items-center text-center lg:items-end lg:text-right">
+                   <div className="w-20 h-20 bg-cyan-500/20 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-sm border border-cyan-500/30">
+                      <IconActivity className="w-10 h-10 text-cyan-400" />
+                   </div>
+                   <h3 className="text-2xl md:text-3xl font-black leading-tight text-white">
+                     لماذا هندسة تقنيات الأجهزة الطبية؟
+                     <span className="block text-cyan-400 mt-2 text-lg md:text-xl font-bold">أهمية التخصص في العراق</span>
+                   </h3>
+                </div>
+
+                <div className="lg:w-2/3 grid gap-6">
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors backdrop-blur-sm">
+                    <h4 className="font-bold text-lg text-cyan-300 mb-2">سوق العمل المتنامي</h4>
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      يشهد العراق ثورة عمرانية في القطاع الصحي مع إنشاء مستشفيات ومراكز تخصصية حديثة، مما يجعل المهندس الطبي الركيزة الأساسية لتشغيل واستدامة هذه المؤسسات.
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors backdrop-blur-sm">
+                    <h4 className="font-bold text-lg text-cyan-300 mb-2">القطاع الخاص والشركات</h4>
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      تتنافس كبرى الشركات العالمية والمحلية في سوق الأجهزة الطبية العراقي، وهي تبحث باستمرار عن مهندسين أكفاء للعمل في مجالات المبيعات الهندسية، الصيانة، والتدريب.
+                    </p>
+                  </div>
+
+                  <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:bg-white/10 transition-colors backdrop-blur-sm">
+                    <h4 className="font-bold text-lg text-cyan-300 mb-2">الأمان الوظيفي والتميز</h4>
+                    <p className="text-gray-300 text-sm leading-relaxed">
+                      التخصص يجمع بين علوم الهندسة والطب، مما يمنحك مكانة وظيفية مرموقة ودخلاً متميزاً نظراً لندرة وحيوية هذا الاختصاص في سوق العمل العراقي.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      const HeadOfDeptVideo = () => {
+        // Updated Instagram Reel Link
+        const INSTAGRAM_VIDEO_URL = "https://www.instagram.com/reel/DRK2BoZDdMl/?igsh=dnQ0ZjFsbmZudXNs"; 
+
+        return (
+          <div className="w-full max-w-4xl mx-auto px-4 mb-6">
+            <a 
+              href={INSTAGRAM_VIDEO_URL}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block bg-white border border-gray-100 rounded-[2rem] p-6 md:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 group cursor-pointer relative overflow-hidden"
+            >
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-6 relative z-10">
+                
+                <div className="text-center sm:text-right space-y-1">
+                  <h3 className="text-2xl font-black text-gray-800 tracking-tight group-hover:text-purple-700 transition-colors duration-300">
+                    كلمة رئيس القسم
+                  </h3>
+                  <p className="text-gray-500 font-medium text-base leading-relaxed">
+                    شاهد شرح مفصل عن مستقبل القسم ومميزاته
+                  </p>
+                </div>
+                
+                {/* Modern Light Frame Button */}
+                <div className="flex-shrink-0">
+                  <div className="pl-2 pr-6 py-2 rounded-full border border-gray-200 bg-gray-50/80 group-hover:bg-purple-50 group-hover:border-purple-200 transition-all duration-300 flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-gray-400 group-hover:text-purple-600 group-hover:border-purple-100 group-hover:-translate-x-1 transition-all duration-300">
+                       <span className="text-xl pb-1" style={{ lineHeight: 0 }}>←</span>
+                    </div>
+                    <span className="text-gray-600 font-bold text-sm group-hover:text-purple-700 transition-colors">
+                      اضغط للمشاهدة
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </a>
+          </div>
+        );
+      };
+
       const InfoSection = () => {
         return (
-          <div className="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+          <div className="max-w-6xl mx-auto px-4 mb-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
             
             {/* 1. Admission Inputs */}
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300">
@@ -284,7 +371,7 @@
 
       const Footer = () => {
         return (
-          <footer className="mt-12 w-full bg-white border-t border-gray-200 py-10">
+          <footer className="mt-8 w-full bg-white border-t border-gray-200 py-10">
             <div className="max-w-4xl mx-auto px-4 text-center">
               
               <div className="flex items-center justify-center space-x-2 space-x-reverse mb-6">
@@ -312,13 +399,11 @@
       };
 
       const App = () => {
-        // BACKGROUND LOGO - NO FILTERS
-        const BACKGROUND_LOGO = "components/eng.png";
+        const BACKGROUND_LOGO = "https://upload.wikimedia.org/wikipedia/commons/e/e6/Al-Mustaqbal_University_College_logo.png";
 
         return (
           <div className="min-h-screen flex flex-col bg-slate-50 relative overflow-x-hidden font-sans">
             
-            {/* Fixed Background Logo Watermark - NO FILTERS */}
             <div className="fixed inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
               <img 
                 src={BACKGROUND_LOGO}
@@ -330,12 +415,15 @@
 
             <Header />
 
-            {/* Main Content */}
             <div className="relative z-10 flex-grow flex flex-col py-6 gap-8">
               
               <MotivationalText />
               
               <DepartmentBanner />
+              
+              <HeadOfDeptVideo />
+
+              <ImportanceSection />
               
               <InfoSection />
 

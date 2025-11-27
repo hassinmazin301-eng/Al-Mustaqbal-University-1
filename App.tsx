@@ -1,20 +1,21 @@
-
 import React from 'react';
 import Header from './components/Header';
 import DepartmentBanner from './components/DepartmentBanner';
 import InfoSection from './components/InfoSection';
 import Footer from './components/Footer';
 import MotivationalText from './components/MotivationalText';
+import ImportanceSection from './components/ImportanceSection';
+import HeadOfDeptVideo from './components/HeadOfDeptVideo';
+import DepartmentChat from './components/DepartmentChat';
 
 const App: React.FC = () => {
-  // Background Logo URL - Using the College logo here creates a nice watermark
+  // BACKGROUND LOGO - NO FILTERS
   const BACKGROUND_LOGO = "https://upload.wikimedia.org/wikipedia/commons/e/e6/Al-Mustaqbal_University_College_logo.png";
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 relative overflow-x-hidden font-sans">
       
-      {/* Fixed Background Logo Watermark */}
-      {/* NO FILTERS: Original color, just low opacity (5%) for a professional watermark look */}
+      {/* Fixed Background Logo Watermark - NO FILTERS */}
       <div className="fixed inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
         <img 
           src={BACKGROUND_LOGO}
@@ -33,7 +34,13 @@ const App: React.FC = () => {
         
         <DepartmentBanner />
         
+        <HeadOfDeptVideo />
+
+        <ImportanceSection />
+        
         <InfoSection />
+
+        <DepartmentChat />
 
       </div>
 
