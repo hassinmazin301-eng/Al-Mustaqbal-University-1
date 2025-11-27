@@ -10,7 +10,7 @@ import DepartmentChat from './components/DepartmentChat';
 
 const App: React.FC = () => {
   // BACKGROUND LOGO - NO FILTERS
-  const BACKGROUND_LOGO = "https://upload.wikimedia.org/wikipedia/commons/e/e6/Al-Mustaqbal_University_College_logo.png";
+  const BACKGROUND_LOGO = "components/eng.png";
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 relative overflow-x-hidden font-sans">
