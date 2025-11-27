@@ -6,11 +6,11 @@ const Header: React.FC = () => {
   
   // 1. RIGHT LOGO: University Logo
   // Replace the link inside the quotes with the University Logo URL
-  const UNIVERSITY_LOGO_URL = "https://upload.wikimedia.org/wikipedia/commons/e/e6/Al-Mustaqbal_University_College_logo.png";
+  const UNIVERSITY_LOGO_URL = "components/mus.png";
   
   // 2. LEFT LOGO: College Logo
   // Replace the link inside the quotes with the College of Engineering Techniques Logo URL
-  const COLLEGE_LOGO_URL = "https://upload.wikimedia.org/wikipedia/commons/e/e6/Al-Mustaqbal_University_College_logo.png";
+  const COLLEGE_LOGO_URL = "components/eng.png";
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-lg transition-all duration-300">
