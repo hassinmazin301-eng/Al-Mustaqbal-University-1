@@ -2,12 +2,15 @@
 import React from 'react';
 
 const Header: React.FC = () => {
-  // Right Logo (University) - Provided by user
-  // We use the link provided. If it fails (e.g. not a direct image), onError will handle it.
-  const UNIVERSITY_LOGO = "https://share.google/images/XIdnqSFNyHCufknYO";
+  // --- CONFIGURATION ---
   
-  // Left Logo (College) - Using the Wiki logo as base to filter to Blue
-  const COLLEGE_LOGO_BASE = "https://upload.wikimedia.org/wikipedia/commons/e/e6/Al-Mustaqbal_University_College_logo.png";
+  // 1. RIGHT LOGO: University Logo
+  // Replace the link inside the quotes with the University Logo URL
+  const UNIVERSITY_LOGO_URL = "https://upload.wikimedia.org/wikipedia/commons/e/e6/Al-Mustaqbal_University_College_logo.png";
+  
+  // 2. LEFT LOGO: College Logo
+  // Replace the link inside the quotes with the College of Engineering Techniques Logo URL
+  const COLLEGE_LOGO_URL = "https://upload.wikimedia.org/wikipedia/commons/e/e6/Al-Mustaqbal_University_College_logo.png";
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-xl border-b border-gray-200 shadow-lg transition-all duration-300">
@@ -15,16 +18,16 @@ const Header: React.FC = () => {
         {/* Container - Flex Row for alignment (RTL: Right is Start, Left is End) */}
         <div className="flex flex-row items-center justify-between">
           
-          {/* Right Logo (University - Green) */}
+          {/* Right Logo (University) */}
           <div className="flex-shrink-0 w-20 md:w-32 flex justify-start">
+             {/* NO FILTERS applied here - Original Colors */}
              <img 
-               src={UNIVERSITY_LOGO} 
+               src={UNIVERSITY_LOGO_URL} 
                alt="شعار جامعة المستقبل" 
                referrerPolicy="no-referrer"
                className="h-20 md:h-28 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform duration-300"
                onError={(e) => {
-                 // Fallback to the reliable wiki logo if the user-provided link fails to load
-                 e.currentTarget.src = "https://upload.wikimedia.org/wikipedia/commons/e/e6/Al-Mustaqbal_University_College_logo.png";
+                 e.currentTarget.style.display = 'none'; // Hide if broken
                }}
              />
           </div>
@@ -38,20 +41,18 @@ const Header: React.FC = () => {
               كلية التقنيات الهندسية
             </h2>
             
-            {/* Decorative Blue Bar matching the reference image */}
+            {/* Decorative Blue Bar */}
              <div className="w-32 md:w-64 h-2 md:h-3 bg-gradient-to-r from-[#0ea5e9] to-cyan-500 rounded-full mt-2 md:mt-3 shadow-sm"></div>
           </div>
 
-          {/* Left Logo (College - Blue Filtered) */}
+          {/* Left Logo (College) */}
           <div className="flex-shrink-0 w-20 md:w-32 flex justify-end">
-             {/* 
-                 Using hue-rotate to turn Green to Blue to match the College branding 
-             */}
+             {/* NO FILTERS applied here - Original Colors */}
              <img 
-               src={COLLEGE_LOGO_BASE}
+               src={COLLEGE_LOGO_URL}
                alt="شعار كلية التقنيات الهندسية" 
                referrerPolicy="no-referrer"
-               className="h-20 md:h-28 w-auto object-contain drop-shadow-md filter hue-rotate-[175deg] brightness-110 contrast-125 hover:scale-105 transition-transform duration-300"
+               className="h-20 md:h-28 w-auto object-contain drop-shadow-md hover:scale-105 transition-transform duration-300"
              />
           </div>
 
