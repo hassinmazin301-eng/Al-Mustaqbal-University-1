@@ -38,7 +38,7 @@ const Header: React.FC = () => {
               جامعة المستقبل
             </h1>
             <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-[#0ea5e9] leading-tight">
-              كلية التقنيات الهندسية
+              الكلية التقنية الهندسية
             </h2>
             
             {/* Decorative Blue Bar */}
